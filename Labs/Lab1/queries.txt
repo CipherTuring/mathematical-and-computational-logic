@@ -1,0 +1,32 @@
+?- [family].
+?- [food].
+?- [math].
+?- [lists].
+
+
+% Who are the ancestors of a specific person
+?- ancestor(Who, olivia). % In this case, olivia is that "specific person"
+
+
+% Who are siblings in your family tree?
+?- sibling(X, Y). % We need to press ";" to keep backtracking, each X is a sibling of a Y
+                  
+
+% Who are food friends?
+?- food_friend(X, Y).
+
+
+% What is the factorial of 6?
+?- factorial(6, Result).
+
+
+% What is the sum of [2,4,6,8]? 
+?- sum_list([2, 4, 6, 8, 10], Result).
+
+
+% What is the length of [a,b,c,d]?
+?- length_list([a, b, c, d], result).
+
+
+% Append [1,2] and [3,4] .
+?- append_list([1,2], [3, 4], New_list).
