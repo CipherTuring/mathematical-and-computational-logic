@@ -81,4 +81,13 @@ Paths = [
   [f, i, j, ... , y]
 ].
 ```
+### 6. Find all paths from entrance to exit and its shortest path at once
 
+```prolog
+-? solve_maze.
+
+[a,b,c,d,e,f,i,j,k,l,m,n,q,r,s,t,u,v,w,x,y]
+[a,b,u,v,w,x,y]
+
+--- Shortest path ---
+[a,b,u,v,w,x,y]
