@@ -129,3 +129,20 @@ get_path_color(2, green).
 get_path_color(3, orange).
 get_path_color(4, purple).
 get_path_color(_, black).
+
+
+%----------------------------------------------------------------------
+% REASONING SYSTEM IMPLEMENTATION SUMMARY
+%----------------------------------------------------------------------
+% The reasoning system is implemented through a multi-layered logical framework that combines 
+% factual knowledge with inferential rules. At the base level, the maze structure is represented 
+% as a graph using edge/2 facts, while blocked/2 facts define constraints. The can_move/2 predicate 
+% serves as the core inference engine, determining valid movements by checking both connectivity 
+% and constraints. The reason/3 predicate then translates these logical conclusions into 
+% human-readable explanations, categorizing each step as 'path is open', 'path is blocked', 
+% or 'destination reached'. During path traversal, the system dynamically generates and displays 
+% these explanations, creating a transparent audit trail of the AI's decision-making process. 
+% This approach demonstrates symbolic AI in action, where logical deduction is coupled with 
+% explanatory capabilities to create an intelligent system that not only finds solutions but 
+% also articulates its reasoning at every step.
+%----------------------------------------------------------------------
