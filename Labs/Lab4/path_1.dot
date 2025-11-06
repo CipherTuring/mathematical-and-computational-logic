@@ -1,0 +1,22 @@
+digraph Path1 {
+    rankdir=TB;
+    node [shape=circle, style=filled];
+    entrance [fillcolor=green];
+    exit [fillcolor=red];
+    node [fillcolor=lightblue];
+    entrance -> a [color=lightgray];
+    a -> b [color=lightgray];
+    a -> c [color=red, style=dashed, label="blocked"];
+    a -> d [color=lightgray];
+    a -> e [color=red, style=dashed, label="blocked"];
+    b -> z [color=lightgray];
+    e -> z [color=lightgray];
+    e -> exit [color=lightgray];
+    z -> exit [color=lightgray];
+    d -> exit [color=lightgray];
+    b -> exit [color=lightgray];
+    c -> b [color=lightgray];
+    entrance -> a [color=blue, penwidth=3.0];
+    a -> b [color=blue, penwidth=3.0];
+    b -> exit [color=blue, penwidth=3.0];
+}
