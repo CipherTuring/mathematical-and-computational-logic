@@ -1,26 +1,33 @@
-# Prolog Task Scheduling with CLP(FD)
+# Prolog Task Scheduler with CLP(FD)
 
-This project implements a **task scheduling system** in **Prolog** using the **Constraint Logic Programming over Finite Domains (CLP(FD))** library.  
-It computes an **optimal schedule** that minimizes the total makespan (the overall completion time) while respecting task durations, precedence relationships, and resource constraints.
+This project is a **constraint-based task scheduler** written in **Prolog**, using the **Constraint Logic Programming over Finite Domains (CLP(FD))** library.  
+It computes an **optimal schedule** that minimizes the total project time (**makespan**) while ensuring that:
+
+- Each task has a defined duration and resource.
+- No two tasks using the same resource overlap.
+- Some tasks must start only after others finish.
 
 ---
 
 ## 🧠 Features
 
-- Defines a set of tasks, each with:
-  - **Name**
-  - **Duration**
-  - **Resource requirement**
-- Supports **precedence constraints** (e.g., Task A must finish before Task B starts).
-- Uses **disjoint2/1** to ensure no overlapping tasks share the same resource.
-- **Optimizes** the schedule by minimizing the makespan.
-- Displays the final schedule with start and end times for each task.
+- **Automatic scheduling** of tasks with resource and precedence constraints.
+- **Makespan optimization** (minimizes total project time).
+- **Non-overlapping constraint** for tasks sharing the same resource.
+- Detailed output showing each task’s start and end times.
+- Includes a **lab example** for demonstration purposes.
 
 ---
 
-## 📋 Example
+## 📋 Task Model
 
-### Task Definitions
+Each task is defined as:
+
+```prolog
+task(Name, Duration, Resource).
+```
+
+Example:
 
 ```prolog
 task(a, 3, 1).
@@ -30,7 +37,21 @@ task(d, 1, 2).
 task(e, 2, 1).
 ```
 
-### Precedence Rules
+This means:
+- Task **a** lasts 3 units of time and uses resource **1**.
+- Task **c** lasts 4 units of time and uses resource **2**, etc.
+
+---
+
+## ⚙️ Precedence Rules
+
+Defined as:
+
+```prolog
+precedes(Previous, Next).
+```
+
+Example:
 
 ```prolog
 precedes(a, b).
@@ -38,51 +59,102 @@ precedes(c, d).
 ```
 
 This means:
-- Task **b** can only start after **a** ends.
-- Task **d** can only start after **c** ends.
+- Task **b** starts only after **a** finishes.
+- Task **d** starts only after **c** finishes.
 
 ---
 
-## ⚙️ How It Works
+## 🚀 How It Works
 
-1. **Collect all tasks** and initialize start and end times as variables.
-2. Apply:
-   - Duration constraints (`End = Start + Duration`)
-   - Precedence constraints (`EndPrev <= StartNext`)
-   - Resource constraints (`disjoint2/1`)
-3. Compute the **makespan** (maximum end time).
-4. Use `labeling([min(Makespan)], AllVars)` to find the optimal assignment.
-5. Print the optimal schedule.
+1. **Collects all tasks** into lists of start and end variables.
+2. Applies:
+   - **Duration constraints** (`End = Start + Duration`)
+   - **Precedence constraints** (`EndPrev <= StartNext`)
+   - **Resource constraints** (no overlapping tasks using the same resource)
+3. Computes the **makespan** (maximum end time).
+4. Runs the **labeling process** to find the schedule minimizing the makespan.
+5. Prints the optimal schedule.
 
 ---
 
-## Run the Program
+## 🧩 Main Predicate
 
-Just run the program and it will automatically initialize
+Run the scheduler by executing:
 
 ```prolog
-?- [scheduler].
+?- schedule.
 ```
 
-It will:
-- Display a message (“Calculating optimal schedule...”)
-- Compute and show the **optimal task start and end times**
-- Print the **total makespan**
+This will:
+- Compute all valid start and end times.
+- Minimize the makespan.
+- Print a detailed report.
 
 ---
 
-## 🖥️ Output Example
+## 📊 Output Example
 
 ```
-Calculating optimal schedule...
+Calculating Schedule
+==============================================
 
---- OPTIMAL SCHEDULE FOUND ---
-  Task: a (Dur: 3, Res: 1) |   Start: 0   |   End: 3
-  Task: b (Dur: 2, Res: 1) |   Start: 3   |   End: 5
-  Task: c (Dur: 4, Res: 2) |   Start: 0   |   End: 4
-  Task: d (Dur: 1, Res: 2) |   Start: 4   |   End: 5
-  Task: e (Dur: 2, Res: 1) |   Start: 5   |   End: 7
+=== OPTIMAL SCHEDULE ===
 
-TOTAL TIME (Makespan): 7
+Task a:
+  Duration: 3
+  Resource: 1
+  Start: 0
+  End: 3
+  ---
+Task b:
+  Duration: 2
+  Resource: 1
+  Start: 3
+  End: 5
+  ---
+Task c:
+  Duration: 4
+  Resource: 2
+  Start: 0
+  End: 4
+  ---
+Task d:
+  Duration: 1
+  Resource: 2
+  Start: 4
+  End: 5
+  ---
+Task e:
+  Duration: 2
+  Resource: 1
+  Start: 5
+  End: 7
+  ---
+
+Total project time (makespan): 7 time units
 ```
 
+---
+
+## 🧪 Lab Example
+
+You can also run a simpler demonstration:
+
+```prolog
+?- lab_example.
+```
+
+This uses three tasks with durations and resource conflicts, showing how the system enforces non-overlapping schedules.
+
+---
+
+## 🧰 Requirements
+
+- **SWI-Prolog**
+- **CLP(FD)** library (included by default in SWI-Prolog)
+
+---
+
+## 🧑‍💻 Author
+
+Developed as an example of **constraint-based task scheduling** using **Prolog** and **CLP(FD)**, demonstrating optimization, precedence, and resource allocation constraints.
