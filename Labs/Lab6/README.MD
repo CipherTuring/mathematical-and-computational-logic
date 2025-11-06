@@ -77,12 +77,12 @@ This means:
 
 ---
 
-## 🧩 Main Predicate
+## 🧩 Run the program
 
-Run the scheduler by executing:
+The program will run automatically at the moment of execute it:
 
 ```prolog
-?- schedule.
+?- [scheduler].
 ```
 
 This will:
@@ -146,15 +146,3 @@ You can also run a simpler demonstration:
 
 This uses three tasks with durations and resource conflicts, showing how the system enforces non-overlapping schedules.
 
----
-
-## 🧰 Requirements
-
-- **SWI-Prolog**
-- **CLP(FD)** library (included by default in SWI-Prolog)
-
----
-
-## 🧑‍💻 Author
-
-Developed as an example of **constraint-based task scheduling** using **Prolog** and **CLP(FD)**, demonstrating optimization, precedence, and resource allocation constraints.
